@@ -1,3 +1,5 @@
+-- noinspection SqlNoDataSourceInspectionForFile
+
 CREATE DATABASE our_app;
 CREATE USER 'admin'@'%' IDENTIFIED BY 'Daybreak-Craving-Unmolded-Shelter-Uselessly3';
 GRANT ALL PRIVILEGES ON our_app.* TO 'admin'@'%';
@@ -5,6 +7,10 @@ FLUSH PRIVILEGES;
 
 USE our_app;
 
+-- The data bellow may or may not be used in the final version, it is simply a placeholder to test correct function.
+-- I know nothing about football, so it might not make sense, but it doesn't really matter to test in AppSmith.
+-- Jason M.
+-- DELETE THIS COMMENT BLOCK BEFORE FINAL VERSION
 CREATE TABLE schedule (
     schedule_id INT,
     season YEAR,
@@ -12,30 +18,8 @@ CREATE TABLE schedule (
 );
 
 INSERT INTO schedule 
-    (schedule_id, season)
 VALUES
-    (1, 2002),
-    (2, 2003),
-    (3, 2004),
-    (4, 2005),
-    (5, 2006),
-    (6, 2007),
-    (7, 2008),
-    (8, 2009),
-    (9, 2010),
-    (10, 2011),
-    (11, 2012),
-    (12, 2013),
-    (13, 2014),
-    (14, 2015),
-    (15, 2016),
-    (16, 2017),
-    (17, 2018),
-    (18, 2019),
-    (19,2020),
-    (20,2021),
-    (21,2022),
-    (22,2023);
+    (22, 2022);
 
 
 CREATE TABLE team (
@@ -54,6 +38,15 @@ CREATE TABLE team (
     FOREIGN KEY (schedule_id) REFERENCES schedule (schedule_id)
 );
 
+INSERT INTO team
+VALUES
+    ('Northeastern Huskies', 'United States', 'Boston', 
+    78.9878, 11.30, 32.2400, 64.8743, 
+    'New England', 'Massachusetts', 22, 52.000) ,
+    ('BU Terriers', 'United States', 'Boston',
+    64.4538, 18.4324, 24.9543, 78.4342,
+    'New England', 'Massachusetts', 22, 48.000);
+
 CREATE TABLE coach (
     coach_id INT,
     firstName VARCHAR(20),
@@ -62,6 +55,11 @@ CREATE TABLE coach (
     PRIMARY KEY (coach_id),
     FOREIGN KEY (teamName) REFERENCES team (teamName)
 );
+
+INSERT INTO coach
+VALUES
+    (1, 'Joseph', 'Aoun', 'Northeastern Huskies'),
+    (2, 'Robert', 'Brown', 'BU Terriers');
 
 CREATE TABLE athlete (
     athlete_id INT,
@@ -75,19 +73,24 @@ CREATE TABLE athlete (
     FOREIGN KEY (teamName) REFERENCES team (teamName)
 );
 
+INSERT INTO athlete
+VALUES
+    (1, 'Paws', 'Husky', 5.950, 182, 32, 'Northeastern Huskies'),
+    (2, 'Rhett', 'Terrier', 5.432, 145, 30, 'BU Terriers');
+
 CREATE TABLE athlete_career_stats (
     athlete_id INT,
     pass_attempts INT,
     completed_passes INT,
-    # pass_percentage can be pass_attempts / completed_passes in a view
+    -- pass_percentage INT, can be pass_attempts / completed_passes in a view
     passing_yards INT,
-    # avg_yds_per_pass_attempt can be pass_attempts / passing_yards in a view
+    -- avg_yds_per_pass_attempt INT, can be pass_attempts / passing_yards in a view
     touchdown_passes INT,
     interceptions_thrown INT,
     times_sacked INT,
     rushing_attempts INT,
     rushing_yards INT,
-    # avg_yds_per_rush can be rushing_yards / rushing_attempts
+    -- avg_yds_per_rush INT, can be rushing_yards / rushing_attempts
     rushing_touchdowns INT,
     rushing_first_downs INT,
     longest_rush INT,
@@ -97,8 +100,16 @@ CREATE TABLE athlete_career_stats (
     PRIMARY KEY (athlete_id)
 );
 
+INSERT INTO athlete_career_stats
+VALUES
+    (1, 15, 10, 326, 5, 3, 20, 32, 40, 9, 7, 60, 24, 20),
+    (2, 20, 15, 434, 3, 2, 32, 40, 32, 1, 0, 150, 30, 24);
+
+
+
 CREATE TABLE bet (
     bet_id INT,
+    better_id INT, -- See note in better table definition below
     favored_moneyline DOUBLE,
     underdog_moneyline DOUBLE,
     favored_team_bet_amount DOUBLE,
@@ -107,6 +118,10 @@ CREATE TABLE bet (
     underdog_team_spread_amount DOUBLE,
     PRIMARY KEY (bet_id)
 );
+
+INSERT INTO bet
+VALUES 
+    (1, 1, 100, 150, 350, 200, 142, 120);
 
 CREATE TABLE odds (
     odds_ID INT,
@@ -119,12 +134,24 @@ CREATE TABLE odds (
     PRIMARY KEY (odds_ID)
 );
 
+INSERT INTO odds
+VALUES
+    (1, 100, 200, 350, 200, 142, 120);
+
+
+
+-- Another idea would probably be doing away with odds_and_bets and adding a oddsID to a bet. This isn't necessary, but
+-- it would make it cleaner.
 CREATE TABLE odds_and_bets(
     oddsID INT,
     betID INT,
     FOREIGN KEY (oddsID) REFERENCES odds (odds_ID),
     FOREIGN KEY (betID) REFERENCES bet (bet_id)
 );
+
+INSERT INTO odds_and_bets
+VALUES
+    (1, 1);
 
 CREATE TABLE game (
     game_id INT,
@@ -144,17 +171,30 @@ CREATE TABLE game (
     FOREIGN KEY (oddsID) REFERENCES odds (odds_ID)
 );
 
+INSERT INTO game
+VALUES
+    (1, 'Northeastern Huskies', 'BU Terriers', 'Completed', 'Win', 'Loss', '24-17', 'Sunny, Low 40s', 1, 1);
+
 CREATE TABLE better (
     user_id INT,
     currencyTotal DOUBLE,
-    betID INT,
-    PRIMARY KEY (user_id),
-    FOREIGN KEY (betID) REFERENCES bet (bet_id)
+    -- betID INT, We need to discuss decoupling betIDs from betters to allow multiple bets to one better
+    PRIMARY KEY (user_id)
+    -- FOREIGN KEY (betID) REFERENCES bet (bet_id)
 );
+
+INSERT INTO better
+VALUES
+    (1, 1000.56);
 
 CREATE TABLE team_in_game (
     teaminGameName VARCHAR(30),
     teamStats VARCHAR(200),
     PRIMARY KEY (teaminGameName),
     FOREIGN KEY (teaminGameName) REFERENCES team (teamName)
-)
+);
+
+INSERT INTO team_in_game
+VALUES
+    ('Northeastern Huskies', 'ExampleStatsHere'),
+    ('BU Terriers', 'ExampleStatsHere');

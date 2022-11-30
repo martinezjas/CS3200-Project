@@ -26,9 +26,14 @@ def create_app():
     
     # Import the various routes
     from src.views import views
+    from src.teams import teams
+    from src.betters import betters
 
 
     # Register the routes that we just imported so they can be properly handled
     app.register_blueprint(views,       url_prefix='/')
+    app.register_blueprint(teams, url_prefix='/teams')
+    app.register_blueprint(betters, url_prefix='/betters')
+
 
     return app
