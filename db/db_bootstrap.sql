@@ -40,12 +40,7 @@ CREATE TABLE team (
 
 INSERT INTO team
 VALUES
-    ('Northeastern Huskies', 'United States', 'Boston', 
-    78.9878, 11.30, 32.2400, 64.8743, 
-    'New England', 'Massachusetts', 22, 52.000) ,
-    ('BU Terriers', 'United States', 'Boston',
-    64.4538, 18.4324, 24.9543, 78.4342,
-    'New England', 'Massachusetts', 22, 48.000);
+    
 
 CREATE TABLE coach (
     coach_id INT,
@@ -75,8 +70,7 @@ CREATE TABLE athlete (
 
 INSERT INTO athlete
 VALUES
-    (1, 'Paws', 'Husky', 5.950, 182, 32, 'Northeastern Huskies'),
-    (2, 'Rhett', 'Terrier', 5.432, 145, 30, 'BU Terriers');
+    
 
 CREATE TABLE athlete_career_stats (
     athlete_id INT,
@@ -102,9 +96,6 @@ CREATE TABLE athlete_career_stats (
 
 INSERT INTO athlete_career_stats
 VALUES
-    (1, 15, 10, 326, 5, 3, 20, 32, 40, 9, 7, 60, 24, 20),
-    (2, 20, 15, 434, 3, 2, 32, 40, 32, 1, 0, 150, 30, 24);
-
 
 
 CREATE TABLE bet (
@@ -121,7 +112,6 @@ CREATE TABLE bet (
 
 INSERT INTO bet
 VALUES 
-    (1, 1, 100, 150, 350, 200, 142, 120);
 
 CREATE TABLE odds (
     odds_ID INT,
@@ -136,7 +126,6 @@ CREATE TABLE odds (
 
 INSERT INTO odds
 VALUES
-    (1, 100, 200, 350, 200, 142, 120);
 
 
 
@@ -151,7 +140,6 @@ CREATE TABLE odds_and_bets(
 
 INSERT INTO odds_and_bets
 VALUES
-    (1, 1);
 
 CREATE TABLE game (
     game_id INT,
@@ -173,7 +161,6 @@ CREATE TABLE game (
 
 INSERT INTO game
 VALUES
-    (1, 'Northeastern Huskies', 'BU Terriers', 'Completed', 'Win', 'Loss', '24-17', 'Sunny, Low 40s', 1, 1);
 
 CREATE TABLE better (
     user_id INT,
@@ -185,7 +172,6 @@ CREATE TABLE better (
 
 INSERT INTO better
 VALUES
-    (1, 1000.56);
 
 CREATE TABLE team_in_game (
     teaminGameName VARCHAR(30),
@@ -196,5 +182,3 @@ CREATE TABLE team_in_game (
 
 INSERT INTO team_in_game
 VALUES
-    ('Northeastern Huskies', 'ExampleStatsHere'),
-    ('BU Terriers', 'ExampleStatsHere');
