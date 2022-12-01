@@ -3,5 +3,3 @@ import json
 from src import db
 
 bets = Blueprint('bets', __name__)
-
-@bets.route('/bets', methods=['GET'])

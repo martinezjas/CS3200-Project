@@ -7,10 +7,7 @@ FLUSH PRIVILEGES;
 
 USE our_app;
 
--- The data bellow may or may not be used in the final version, it is simply a placeholder to test correct function.
--- I know nothing about football, so it might not make sense, but it doesn't really matter to test in AppSmith.
--- Jason M.
--- DELETE THIS COMMENT BLOCK BEFORE FINAL VERSION
+
 CREATE TABLE schedule (
     schedule_id INT,
     season YEAR,
@@ -53,8 +50,7 @@ CREATE TABLE coach (
 
 INSERT INTO coach
 VALUES
-    (1, 'Joseph', 'Aoun', 'Northeastern Huskies'),
-    (2, 'Robert', 'Brown', 'BU Terriers');
+    
 
 CREATE TABLE athlete (
     athlete_id INT,
