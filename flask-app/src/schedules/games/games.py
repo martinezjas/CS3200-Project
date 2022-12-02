@@ -2,14 +2,19 @@ from flask import Blueprint, request, jsonify, make_response
 import json
 from src import db
 
+games_blueprint = Blueprint('games_blueprint', __name__)
 
-games = Blueprint('games', __name__)
 
-@games.route('/games', methods=['GET'])
+@games_blueprint.route('/', methods=['GET'])
+def empty():
+    return ('<h1>How did you get here?</h1>')
+
+
+@games_blueprint.route('/view_games', methods=['GET'])
 def get_games():
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT gameStatus AS 'Game Status', homeTeam AS 'Home Team', awayTeam AS 'Away Team', CONCAT(homeResult, "-", awayResult) AS 'Home-Away', finalScore AS 'Final Score', weather AS 'Weather', FROM game')
+    cursor.execute('SELECT gameStatus AS "Game Status", homeTeam AS "Home Team", awayTeam AS "Away Team", CONCAT(homeResult, "-", awayResult) AS "Home-Away", finalScore AS "Final Score", weather AS Weather FROM game')
 
     column_headers = [x[0] for x in cursor.description]
 
@@ -20,4 +25,4 @@ def get_games():
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
 
-    return jsonify(json_data) 
+    return jsonify(json_data)

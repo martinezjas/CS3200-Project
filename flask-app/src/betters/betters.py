@@ -2,10 +2,15 @@ from flask import Blueprint, request, jsonify, make_response
 import json
 from src import db
 
+betters_blueprint = Blueprint('betters_blueprint', __name__)
 
-betters = Blueprint('betters', __name__)
 
-@betters.route('/betters', methods=['GET'])
+@betters_blueprint.route('/', methods=['GET'])
+def empty():
+    return ('<h1>How did you get here?</h1>')
+
+
+@betters_blueprint.route('/view_betters', methods=['GET'])
 def get_betters():
     cursor = db.get_db().cursor()
 
@@ -20,4 +25,4 @@ def get_betters():
     for row in theData:
         json_data.append(dict(zip(column_headers, row)))
 
-    return jsonify(json_data)    
+    return jsonify(json_data)

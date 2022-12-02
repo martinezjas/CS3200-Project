@@ -1,12 +1,9 @@
--- noinspection SqlNoDataSourceInspectionForFile
-
 CREATE DATABASE our_app;
 CREATE USER 'admin'@'%' IDENTIFIED BY 'Daybreak-Craving-Unmolded-Shelter-Uselessly3';
 GRANT ALL PRIVILEGES ON our_app.* TO 'admin'@'%';
 FLUSH PRIVILEGES;
 
 USE our_app;
-
 
 CREATE TABLE schedule (
     schedule_id INT NOT NULL AUTO_INCREMENT,
@@ -16,7 +13,6 @@ CREATE TABLE schedule (
 
 INSERT INTO schedule (season)
 VALUES (2022);
-
 
 CREATE TABLE team (
     teamName VARCHAR(30) NOT NULL,
@@ -38,10 +34,10 @@ INSERT INTO team
 VALUES
     ('Northeastern Huskies', 'United States', 'Boston', 
     78.9878, 11.30, 32.2400, 64.8743, 
-    'New England', 'Massachusetts', 22, 52.000) ,
+    'New England', 'Massachusetts', 1, 52.000) ,
     ('BU Terriers', 'United States', 'Boston',
     64.4538, 18.4324, 24.9543, 78.4342,
-    'New England', 'Massachusetts', 22, 48.000);
+    'New England', 'Massachusetts', 1, 48.000);
 
 CREATE TABLE coach (
     coach_id INT NOT NULL AUTO_INCREMENT,
@@ -114,7 +110,9 @@ CREATE TABLE bet (
 );
 
 INSERT INTO bet
-VALUES 
+    (better_id, favored_moneyline, underdog_moneyline, favored_team_bet_amount, underdog_team_bet_amount, favored_team_spread_amount, underdog_team_spread_amount)
+VALUES
+    (1, 15, 10, 326, 5, 3, 20);
 
 CREATE TABLE odds (
     odds_ID INT NOT NULL AUTO_INCREMENT,
@@ -128,8 +126,9 @@ CREATE TABLE odds (
 );
 
 INSERT INTO odds
+    (calculated_favored_team_ml, calculated_underdog_team_ml, calcuated_underdog_total, calculated_favored_total, calculated_favored_spread, caclulated_underdog_spread)
 VALUES
-
+    (1, 15, 10, 326, 5, 3);
 
 
 -- Another idea would probably be doing away with odds_and_bets and adding a oddsID to a bet. This isn't necessary, but
@@ -143,6 +142,7 @@ CREATE TABLE odds_and_bets(
 
 INSERT INTO odds_and_bets
 VALUES
+    (1, 1);
 
 CREATE TABLE game (
     game_id INT NOT NULL AUTO_INCREMENT,
@@ -175,8 +175,9 @@ CREATE TABLE better (
     -- FOREIGN KEY (betID) REFERENCES bet (bet_id)
 );
 
-INSERT INTO better
+INSERT INTO better (currencyTotal)
 VALUES
+    (10000);
 
 CREATE TABLE team_in_game (
     teaminGameName VARCHAR(30) NOT NULL,
