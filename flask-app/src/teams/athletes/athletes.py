@@ -10,9 +10,6 @@ def empty():
     return ('<h1>How did you get here?</h1>')
 
 
-
-
-
 @athletes_blueprint.route('/view_athletes', methods=['GET'])
 def get_athletes():
     cursor = db.get_db().cursor()

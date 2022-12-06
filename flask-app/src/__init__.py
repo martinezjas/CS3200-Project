@@ -48,4 +48,5 @@ def create_app():
     app.register_blueprint(athletes_blueprint, url_prefix='/athletes')
     app.register_blueprint(coaches_blueprint, url_prefix='/coaches')
 
+
     return app
