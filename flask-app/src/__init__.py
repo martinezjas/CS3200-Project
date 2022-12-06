@@ -1,4 +1,4 @@
-# Some set up for the application 
+# Some set up for the application
 
 
 from flask import Flask  # noqa
@@ -11,8 +11,8 @@ db = MySQL()
 def create_app():
     app = Flask(__name__)
 
-    # secret key that will be used for securely signing the session 
-    # cookie and can be used for any other security related needs by 
+    # secret key that will be used for securely signing the session
+    # cookie and can be used for any other security related needs by
     # extensions or your application
     app.config['SECRET_KEY'] = 'Record-Autograph-Unrivaled-Gear-Shifty0'
 
