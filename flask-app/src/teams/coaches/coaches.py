@@ -26,3 +26,23 @@ def get_coaches():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+
+#specific coach route
+@coaches_blueprint.route('/view_coach/<idNumber>')    
+def get_coach(idNumber):
+    cursor = db.get_db().cursor()
+    cursor2 = db.get_db().cursor()
+
+    cursor.execute('SELECT * FROM coach WHERE coach_id = %s', idNumber)
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
