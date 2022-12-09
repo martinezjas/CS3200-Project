@@ -26,3 +26,21 @@ def get_games():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+#get specific game
+@games_blueprint.route('/view_games/<idNumber>')    
+def get_athlete(idNumber):
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT * FROM game WHERE game_id = %s', idNumber)
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
