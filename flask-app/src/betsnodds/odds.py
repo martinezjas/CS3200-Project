@@ -26,3 +26,21 @@ def get_odds():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+#specific odds route
+@odds_blueprint.route('/view_odds/<idNumber>')    
+def get_athlete(idNumber):
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT * FROM odds WHERE odds_id = %s', idNumber)
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
