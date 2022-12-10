@@ -21,7 +21,7 @@ def make_bet():
     uspread = request.form['uspread']
     query = f'INSERT INTO bet(better_id,favored_moneyline,underdog_moneyline,favored_team_bet_amount,' \
             f'underdog_team_bet_amount,favored_team_spread_amount,underdog_team_spread_amount) ' \
-            f'VALUES(\"{better_id}\",\"{fml}\",\"{uml}\",\"{fbet}\",\"{ubet}\",\"{fspread}\",\"{uspread}\")
+            f'VALUES(\"{better_id}\",\"{fml}\",\"{uml}\",\"{fbet}\",\"{ubet}\",\"{fspread}\",\"{uspread}\")'
     cursor.execute(query)
     db.get_db().commit()
     return "Your bet has been placed!"
