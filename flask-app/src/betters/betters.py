@@ -26,3 +26,14 @@ def get_betters():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+@betters_blueprint.route('/add_better', methods=['POST'])
+def add_better():
+    cursor = db.get_db().cursor()
+    currencyTotal = request.form['currencyTotal']
+    query = f'INSERT INTO betters (currencyTotal) VALUES (\"{currencyTotal}\")'
+    cursor.execute(query)
+    db.get_db().commit()
+    return "New Better Created!"
+
+
