@@ -32,7 +32,25 @@ def get_games():
 def get_athlete(idNumber):
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT * FROM game WHERE game_id = %s', idNumber)
+    cursor.execute('SELECT * game WHERE game_id = %s', idNumber)
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
+
+#get home vs away
+@games_blueprint.route('/view_HvA_games')    
+def get_gamesHvA():
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT CONCAT(homeTeam, " V. ", awayTeam) AS "HvA", calculated_favored_team_ml, calculated_underdog_team_ml, calcuated_underdog_total, calculated_favored_total, calculated_favored_spread, caclulated_underdog_spread, oddsID FROM game JOIN odds ON game.oddsID = odds.odds_ID')
 
     column_headers = [x[0] for x in cursor.description]
 

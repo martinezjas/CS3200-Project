@@ -14,7 +14,7 @@ def empty():
 def get_coaches():
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT CONCAT(firstName, " ", lastName) AS Name, teamName AS "Team Name" FROM coaches')
+    cursor.execute('SELECT CONCAT(firstName, " ", lastName) AS Name, teamName AS "Team" FROM coaches')
 
     column_headers = [x[0] for x in cursor.description]
 

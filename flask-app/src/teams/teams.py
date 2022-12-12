@@ -15,7 +15,7 @@ def get_teams():
     cursor = db.get_db().cursor()
 
     cursor.execute(
-        'SELECT teamName AS "Team Name", CONCAT(city, ", ", country) AS Location, CONCAT(conference, ", ", division) AS "Conference, Division" FROM team')
+        'SELECT teamName AS "Team", CONCAT(city, ", ", country) AS Location, CONCAT(conference, ", ", division) AS "Conference, Division" FROM team')
 
     column_headers = [x[0] for x in cursor.description]
 

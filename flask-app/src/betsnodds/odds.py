@@ -27,6 +27,7 @@ def get_odds():
 
     return jsonify(json_data)
 
+
 #specific odds route
 @odds_blueprint.route('/view_odds/<idNumber>')    
 def get_athlete(idNumber):
@@ -44,3 +45,4 @@ def get_athlete(idNumber):
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+

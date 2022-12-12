@@ -32,10 +32,10 @@ CREATE TABLE team (
 
 INSERT INTO team
 VALUES
-    ('Northeastern Huskies', 'United States', 'Boston', 
+    ('Northeastern_Huskies', 'United States', 'Boston', 
     78.9878, 11.30, 32.2400, 64.8743, 
     'New England', 'Massachusetts', 1, 52.000) ,
-    ('BU Terriers', 'United States', 'Boston',
+    ('BU_Terriers', 'United States', 'Boston',
     64.4538, 18.4324, 24.9543, 78.4342,
     'New England', 'Massachusetts', 1, 48.000);
 
@@ -50,8 +50,8 @@ CREATE TABLE coach (
 
 INSERT INTO coach
 VALUES
-    (1, 'Joseph', 'Aoun', 'Northeastern Huskies'),
-    (2, 'Robert', 'Brown', 'BU Terriers');
+    (1, 'Joseph', 'Aoun', 'Northeastern_Huskies'),
+    (2, 'Robert', 'Brown', 'BU_Terriers');
 
 CREATE TABLE athlete (
     athlete_id INT NOT NULL AUTO_INCREMENT,
@@ -67,8 +67,8 @@ CREATE TABLE athlete (
 
 INSERT INTO athlete
 VALUES
-    (1, 'Paws', 'Husky', 5.950, 182, 32, 'Northeastern Huskies'),
-    (2, 'Rhett', 'Terrier', 5.432, 145, 30, 'BU Terriers');
+    (1, 'Paws', 'Husky', 5.950, 182, 32, 'Northeastern_Huskies'),
+    (2, 'Rhett', 'Terrier', 5.432, 145, 30, 'BU_Terriers');
 
 CREATE TABLE athlete_career_stats (
     athlete_id INT NOT NULL,
@@ -164,7 +164,7 @@ CREATE TABLE game (
 
 INSERT INTO game
 VALUES
-    (1, 'Northeastern Huskies', 'BU Terriers', 'Completed', 'Win', 'Loss', '24-17', 'Sunny, Low 40s', 1, 1);
+    (1, 'Northeastern_Huskies', 'BU_Terriers', 'Completed', 'Win', 'Loss', '24-17', 'Sunny, Low 40s', 1, 1);
 
 
 CREATE TABLE better (
@@ -188,5 +188,5 @@ CREATE TABLE team_in_game (
 
 INSERT INTO team_in_game
 VALUES
-    ('Northeastern Huskies', 'ExampleStatsHere'),
-    ('BU Terriers', 'ExampleStatsHere');
+    ('Northeastern_Huskies', 'ExampleStatsHere'),
+    ('BU_Terriers', 'ExampleStatsHere');

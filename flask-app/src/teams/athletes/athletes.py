@@ -15,7 +15,7 @@ def get_athletes():
     cursor = db.get_db().cursor()
 
     cursor.execute(
-        'SELECT CONCAT(firstName, " ", lastName) AS Name, height, weight, age, teamName AS "Team Name" FROM athlete')
+        'SELECT CONCAT(firstName, " ", lastName) AS Name, height, weight, age, teamName AS "Team" FROM athlete')
 
     column_headers = [x[0] for x in cursor.description]
 

@@ -25,3 +25,15 @@ def make_bet():
     cursor.execute(query)
     db.get_db().commit()
     return "Your bet has been placed!"
+
+@bets_blueprint.route('/getbet', methods=['GET'])
+def see_bet():
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT * FROM bet')
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+    return jsonify(json_data)
