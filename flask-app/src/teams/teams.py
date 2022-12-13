@@ -15,7 +15,7 @@ def get_teams():
     cursor = db.get_db().cursor()
 
     cursor.execute(
-        'SELECT teamName AS "Team", CONCAT(city, ", ", country) AS Location, CONCAT(conference, ", ", division) AS "Conference, Division" FROM team')
+        'SELECT team_id, teamName AS "Team", CONCAT(city, ", ", country) AS Location, CONCAT(conference, ", ", division) AS "Conference, Division" FROM team')
 
     column_headers = [x[0] for x in cursor.description]
 
@@ -29,11 +29,11 @@ def get_teams():
     return jsonify(json_data)
 
 #specific team route
-@teams_blueprint.route('/view_team/<teamName>')    
-def get_athlete(teamName):
+@teams_blueprint.route('/view_team/<teamNum>')
+def get_athlete(teamNum):
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT * FROM team WHERE teamName = %s', teamName)
+    cursor.execute('SELECT * FROM team WHERE team_id = %s', teamNum)
 
     column_headers = [x[0] for x in cursor.description]
 
