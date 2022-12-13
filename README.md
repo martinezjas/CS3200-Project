@@ -1,25 +1,11 @@
-# MySQL + Flask Boilerplate Project
+TEAM JAC:
 
-This repo contains a boilerplate setup for spinning up 2 docker containers: 
-1. A MySQL 8 container for obvious reasons
-1. A Python Flask container to implement a REST API
+Our product is a betting platform for the NFL, that offers a look into Teams' stats, 
+the scheduling for the remaining games of the season and odds for each game throughout the season. 
+The users are able to look at these odds and can put how much ever money they want on them.
 
-## How to setup and start the containers
-**Important** - you need Docker Desktop installed
+Our Appsmith site has 5 pages that access the API, with 4 unique instances of GET requests and 
+1 instace of a POST request. It is important to note that on our 'teams' page and 'betting' page 
+you can click on a row to lead to further statistics or accessing the POST request to place a bet, respectively. 
 
-1. Clone this repository.  
-1. Create a file named `db_root_password.txt` in the `secrets/` folder and put inside of it the root password for MySQL. 
-1. Create a file named `db_password.txt` in the `secrets/` folder and put inside of it the password you want to use for the `webapp` user. 
-1. In a terminal or command prompt, navigate to the folder with the `docker-compose.yml` file.  
-1. Build the images with `docker compose build`
-1. Start the containers with `docker compose up`.  To run in detached mode, run `docker compose up -d`. 
-
-## For setting up a Conda Web-Dev environment:
-
-1. `conda create -n webdev python=3.9`
-1. `conda activate webdev`
-1. `pip install flask flask-mysql flask-restful cryptography flask-login`
-
-
-
-
+Final Presentation Video Link: https://youtu.be/6D-ixURJBCM
